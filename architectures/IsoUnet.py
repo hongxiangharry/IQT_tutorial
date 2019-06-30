@@ -12,7 +12,7 @@ from keras.models import Model
 
 K.set_image_dim_ordering('th')
 
-def generate_unet_model(gen_conf, train_conf) :
+def generate_iso_unet_model(gen_conf, train_conf) :
     dataset = train_conf['dataset']
     activation = train_conf['activation']
     dimension = train_conf['dimension']
@@ -31,14 +31,14 @@ def generate_unet_model(gen_conf, train_conf) :
 
     assert dimension in [2, 3], "Unexpected dimension of patch."
 
-    model = __generate_unet_model(
+    model = __generate_iso_unet_model(
         dimension, num_modalities, input_shape, output_shape, activation, downsize_factor=downsize_factor)
 
     model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
 
     return model
 
-def __generate_unet_model(
+def __generate_iso_unet_model(
     dimension, num_modalities, input_shape, output_shape, activation, downsize_factor=2):
     input = Input(shape=input_shape)
 

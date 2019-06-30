@@ -12,7 +12,7 @@ from keras.models import Model
 from keras.optimizers import Adam, SGD
 K.set_image_dim_ordering('th')
 
-def generate_hetero_unet_model(gen_conf, train_conf) :
+def generate_aniso_unet_old_model(gen_conf, train_conf) :
     dataset = train_conf['dataset']
     activation = train_conf['activation']
     dimension = train_conf['dimension']
@@ -40,7 +40,7 @@ def generate_hetero_unet_model(gen_conf, train_conf) :
 
     assert dimension in [2, 3]
 
-    model = __generate_hetero_unet_model(
+    model = __generate_aniso_unet_old_model(
         dimension, num_modalities, input_shape, output_shape, activation, shuffling_dim=shrink_dim, sparse_scale=sparse_scale, downsize_factor=downsize_factor, num_kernels=num_kernels, num_filters=num_filters,  thickness_factor = thickness_factor)
     if optimizer == 'Adam' :
         optimizer = Adam(lr=lr, decay=decay)
@@ -50,7 +50,7 @@ def generate_hetero_unet_model(gen_conf, train_conf) :
 
     return model
 
-def __generate_hetero_unet_model(
+def __generate_aniso_unet_old_model(
     dimension, num_modalities, input_shape, output_shape, activation, shuffling_dim, sparse_scale, downsize_factor=2, num_kernels=3, num_filters=64, thickness_factor = 4) :
     '''
     isotropic down-sample k = 4
@@ -305,104 +305,3 @@ def get_shuffling_operation(dimension, input, shuffling_dim, sparse_scale) :
     output_shape[2:] = output_shape[2:]*sparse_scale
     output_shape[1] = output_shape[1]//sparse_scale[0]//sparse_scale[1]//sparse_scale[2] # channel goes first
     return Reshape(tuple(output_shape[1:]))(input) # reshape by C-language order
-
-def forward_periodic_shuffle(patch, upsampling_rate=2) :
-    """
-    Function source: Ryu's ESPCN code.
-    This is the 3D extension of periodic shuffling (equation (4) in Magic Pony CVPR 2016).
-    Args:
-        patch (numpy array): 3 or 4 dimensional array with the last dimension being the dt components
-        upsampling_rate (int): upsampling rate
-
-    Returns:
-    """
-    if patch.ndim == 3:
-        if patch.shape[2] == (upsampling_rate ** 2):
-            dim_i, dim_j, dim_filters = patch.shape
-            # apply periodic shuffling:
-            patch_ps = np.ndarray((dim_i * upsampling_rate,
-                                   dim_j * upsampling_rate),
-                                  dtype='float64')
-
-            # Apply reverse shuffling (optional):
-            shuffle_indices = [(i, j)
-                               for j in xrange(upsampling_rate)
-                               for i in xrange(upsampling_rate)]
-
-            no_channels = dim_filters / (upsampling_rate ** 3)
-
-            for (i, j) in shuffle_indices:
-                patch_ps[i::upsampling_rate,
-                j::upsampling_rate] \
-                    = patch[:, :, np.mod(i, upsampling_rate) +
-                                  np.mod(j, upsampling_rate) * upsampling_rate]
-
-        else:
-            dim_i, dim_j, dim_filters = patch.shape
-
-            # apply periodic shuffling:
-            patch_ps = np.ndarray((dim_i * upsampling_rate,
-                                   dim_j * upsampling_rate,
-                                   dim_filters / (upsampling_rate ** 2)), dtype='float64')
-
-            shuffle_indices = [(i, j)
-                               for j in xrange(upsampling_rate)
-                               for i in xrange(upsampling_rate)]
-
-            no_channels = dim_filters / (upsampling_rate ** 2)
-
-            for c in xrange(dim_filters // (upsampling_rate ** 2)):
-                for (i, j) in shuffle_indices:
-                    patch_ps[i::upsampling_rate,
-                    j::upsampling_rate,
-                    c] = patch[:, :, np.mod(i, upsampling_rate) +
-                                     np.mod(j, upsampling_rate) * upsampling_rate +
-                                     c * (upsampling_rate ** 2)]
-
-    elif patch.ndim == 4:
-        dim_i, dim_j, dim_k, dim_filters = patch.shape
-
-        # apply periodic shuffling:
-        patch_ps = np.ndarray((dim_i * upsampling_rate,
-                               dim_j * upsampling_rate,
-                               dim_j * upsampling_rate,
-                               dim_filters // (upsampling_rate ** 3)), dtype='float64')
-
-        shuffle_indices = [(i, j, k) for k in xrange(upsampling_rate)
-                           for j in xrange(upsampling_rate)
-                           for i in xrange(upsampling_rate)]
-
-        no_channels = dim_filters / (upsampling_rate ** 3)
-
-        for c in xrange(dim_filters // (upsampling_rate ** 3)):
-            for (i, j, k) in shuffle_indices:
-                patch_ps[i::upsampling_rate, j::upsampling_rate, k::upsampling_rate, c] \
-                    = patch[:, :, :, np.mod(i, upsampling_rate) +
-                                     np.mod(j, upsampling_rate) * upsampling_rate +
-                                     np.mod(k, upsampling_rate) * (upsampling_rate ** 2) +
-                                     c * (upsampling_rate ** 3)]
-
-    elif patch.ndim == 5:  # apply periodic shuffling to a batch of examples.
-        batch_size, dim_i, dim_j, dim_k, dim_filters = patch.shape
-
-        # Apply reverse shuffling (optional):
-        shuffle_indices = [(i, j, k) for k in xrange(upsampling_rate)
-                           for j in xrange(upsampling_rate)
-                           for i in xrange(upsampling_rate)]
-
-        patch_ps = np.ndarray((batch_size,
-                               dim_i * upsampling_rate,
-                               dim_j * upsampling_rate,
-                               dim_j * upsampling_rate,
-                               dim_filters // (upsampling_rate ** 3)), dtype='float64')
-
-        no_channels = dim_filters // (upsampling_rate ** 3)
-
-        for c in xrange(dim_filters // (upsampling_rate ** 3)):
-            for (i, j, k) in shuffle_indices:
-                patch_ps[:, i::upsampling_rate, j::upsampling_rate, k::upsampling_rate, c] \
-                    = patch[:, :, :, :, np.mod(i, upsampling_rate) +
-                                        np.mod(j, upsampling_rate) * upsampling_rate +
-                                        np.mod(k, upsampling_rate) * (upsampling_rate ** 2) +
-                                        c * (upsampling_rate ** 3)]
-    return patch_ps
