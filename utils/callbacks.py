@@ -22,12 +22,17 @@ def generate_callbacks(general_configuration, training_configuration, case_name,
         training_configuration['dimension'],
         str(training_configuration['patch_shape']),
         str(training_configuration['extraction_step'])+'_meanstd',
-        'npz')    
+        'npz')
+    ## check and make folders
+        meanstd_foldername = os.path.dirname(meanstd_filename)
+        if not os.path.isdir(meanstd_foldername) :
+            os.makedirs(meanstd_foldername)
+            
     if (mean is None) or (std is None):
         mean = {'input': 0, 'output': 0}
         std = {'input': 1, 'output': 1}
     np.savez(meanstd_filename, mean=mean, std=std)
-        
+    
     ## save model
     model_filename = generate_output_filename(
         general_configuration['model_path'],
