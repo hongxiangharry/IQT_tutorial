@@ -14,7 +14,7 @@ def read_meanstd(gen_conf, test_conf, case_name) :
             str(test_conf['patch_shape']),
             str(test_conf['extraction_step'])+'_mean',
             'csv')
-    with open('mean_filename', mode='r') as infile:
+    with open(mean_filename, mode='r') as infile:
         reader = csv.reader(infile)
         mean = {rows[0]:rows[1] for rows in reader}
         
@@ -27,7 +27,7 @@ def read_meanstd(gen_conf, test_conf, case_name) :
             str(test_conf['patch_shape']),
             str(test_conf['extraction_step'])+'_std',
             'csv')
-    with open('std_filename', mode='r') as infile:
+    with open(std_filename, mode='r') as infile:
         reader = csv.reader(infile)
         std = {rows[0]:rows[1] for rows in reader}
     return mean, std
