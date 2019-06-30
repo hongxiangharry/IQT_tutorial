@@ -3,7 +3,6 @@ from keras.callbacks import EarlyStopping
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks import LearningRateScheduler
 from utils.ioutils import generate_output_filename
-import csv
 
 import numpy as np
 import os
@@ -23,7 +22,7 @@ def generate_callbacks(general_configuration, training_configuration, case_name,
         training_configuration['dimension'],
         str(training_configuration['patch_shape']),
         str(training_configuration['extraction_step'])+'_mean',
-        'csv')
+        'npz')
     std_filename = generate_output_filename(
         general_configuration['model_path'],
         training_configuration['dataset'],
@@ -32,7 +31,7 @@ def generate_callbacks(general_configuration, training_configuration, case_name,
         training_configuration['dimension'],
         str(training_configuration['patch_shape']),
         str(training_configuration['extraction_step'])+'_std',
-        'csv')
+        'npz')
     ## check and make folders
     meanstd_foldername = os.path.dirname(mean_filename)
     if not os.path.isdir(meanstd_foldername) :
@@ -41,19 +40,16 @@ def generate_callbacks(general_configuration, training_configuration, case_name,
     if (mean is None) or (std is None):
         mean = {'input': np.array([0.0]), 'output': np.array([0.0])}
         std = {'input': np.array([1.0]), 'output': np.array([1.0])}
-    ## write mean
-#     w = csv.writer(open(mean_filename, "w"))
-#     for key, val in mean.items():
-#         w.writerow([key, val])
-#     w.close()
-    with open(mean_filename, "w") as outfile:
-        w = csv.writer(outfile)
-        for key, val in mean.items():
-            w.writerow([key, val])
-    with open(std_filename, "w") as outfile:
-        w = csv.writer(outfile)
-        for key, val in std.items():
-            w.writerow([key, val])
+    np.savez(mean_filename, mean_input=mean['input'], mean_output=mean['output'])
+    np.savez(std_filename, std_input=std['input'], std_output=std['output'])    
+#     with open(mean_filename, "w") as outfile:
+#         w = csv.writer(outfile)
+#         for key, val in mean.items():
+#             w.writerow([key, val])
+#     with open(std_filename, "w") as outfile:
+#         w = csv.writer(outfile)
+#         for key, val in std.items():
+#             w.writerow([key, val])
             
     ## save model
     model_filename = generate_output_filename(

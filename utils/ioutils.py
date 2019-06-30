@@ -13,10 +13,14 @@ def read_meanstd(gen_conf, test_conf, case_name) :
             test_conf['dimension'],
             str(test_conf['patch_shape']),
             str(test_conf['extraction_step'])+'_mean',
-            'csv')
-    with open(mean_filename, mode='r') as infile:
-        reader = csv.reader(infile)
-        mean = {rows[0]:np.array(rows[1]) for rows in reader}
+            'npz')
+#     with open(mean_filename, mode='r') as infile:
+#         reader = csv.reader(infile)
+#         mean = {rows[0]:np.array(rows[1]) for rows in reader}
+    mean = {}
+    mean_f = np.load(mean_filename)
+    mean['input'] = mean_f['mean_input']
+    mean['output'] = mean_f['mean_output']
         
     std_filename = generate_output_filename(
             gen_conf['model_path'],
@@ -26,10 +30,14 @@ def read_meanstd(gen_conf, test_conf, case_name) :
             test_conf['dimension'],
             str(test_conf['patch_shape']),
             str(test_conf['extraction_step'])+'_std',
-            'csv')
-    with open(std_filename, mode='r') as infile:
-        reader = csv.reader(infile)
-        std = {rows[0]:np.array(rows[1]) for rows in reader}
+            'npz')
+#     with open(std_filename, mode='r') as infile:
+#         reader = csv.reader(infile)
+#         std = {rows[0]:np.array(rows[1]) for rows in reader}
+    std = {}
+    std_f = np.load(std_filename)
+    std['input'] = std_f['std_input']
+    std['output'] = std_f['std_output']
     return mean, std
 
 def read_model(gen_conf, train_conf, case_name) :
