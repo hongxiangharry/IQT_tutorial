@@ -8,13 +8,6 @@ import csv
 import numpy as np
 import os
 
-
-
-# dict = {'Python' : '.py', 'C++' : '.cpp', 'Java' : '.java'}
-# w = csv.writer(open("output.csv", "w"))
-# for key, val in dict.items():
-#     w.writerow([key, val])
-
 # def generate_output_filename(
 #     path, dataset, case_name, approach, dimension, patch_shape, extraction_step, extension) :
 #     file_pattern = '{}/{}/{:02}-{}-{}-{}-{}.{}'

@@ -2,19 +2,35 @@ import nibabel as nib
 import numpy as np
 import os
 from architectures.arch_creator import generate_model
+import csv
 
-def read_meanstd(gen_conf, test_conf, case_name) :
-    meanstd_filename = generate_output_filename(
+def read_meanstd(gen_conf, test_conf) :
+    mean_filename = generate_output_filename(
             gen_conf['model_path'],
             test_conf['dataset'],
             case_name,
             test_conf['approach'],
             test_conf['dimension'],
             str(test_conf['patch_shape']),
-            str(test_conf['extraction_step'])+'_meanstd',
-            'npz')
-    npzfile = np.load(meanstd_filename)
-    return npzfile['mean'], npzfile['std']
+            str(test_conf['extraction_step'])+'_mean',
+            'csv')
+    with open('mean_filename', mode='r') as infile:
+        reader = csv.reader(infile)
+        mean = {rows[0]:rows[1] for rows in reader}
+        
+    std_filename = generate_output_filename(
+            gen_conf['model_path'],
+            test_conf['dataset'],
+            case_name,
+            test_conf['approach'],
+            test_conf['dimension'],
+            str(test_conf['patch_shape']),
+            str(test_conf['extraction_step'])+'_std',
+            'csv')
+    with open('std_filename', mode='r') as infile:
+        reader = csv.reader(infile)
+        std = {rows[0]:rows[1] for rows in reader}
+    return mean, std
 
 def read_model(gen_conf, train_conf, case_name) :
     model = generate_model(gen_conf, train_conf)
