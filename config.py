@@ -1,12 +1,12 @@
 general_configuration = {
     'num_classes' : 3, # label classes
-    'dataset_path' : '/Users/hongxianglin/document/ucl_coding/P5_mri_image/',
-    # 'dataset_path' : '/home/harrylin/',
-    'base_path' : '/Users/hongxianglin/document/ucl_coding/P3_IQT_Unet/tutorial_result/',
+    # 'dataset_path' : '/Users/hongxianglin/document/ucl_coding/P5_mri_image/', # PC
+    'dataset_path' : '/home/harrylin/', # cluster
+    # 'base_path' : '/Users/hongxianglin/document/ucl_coding/P3_IQT_Unet/tutorial_result/', # PC
+    'base_path' : '/home/harrylin/iqt_tutorial_results', # cluster
     'job_name' : 'default',
     'log_path' : 'log',
     'model_path' : 'models',
-    # 'results_path' : '/Users/hongxianglin/document/ucl_coding/pfcnn_results/',
     'results_path' : 'result',
     'evaluation_path': 'evaluation',
     'dataset_info' : {
@@ -77,7 +77,7 @@ general_configuration = {
 training_configuration = {
     'retrain' : False,
     'activation' : 'null',
-    'approach' : 'UnetContrastHeteroTypeA',
+    'approach' : 'SRUnet',
     'dataset' : 'HCP-Wu-Minn-Contrast',
     'dimension' : 3,
     'extraction_step' : (16, 16, 2),
