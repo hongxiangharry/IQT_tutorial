@@ -4,7 +4,7 @@ import os
 from architectures.arch_creator import generate_model
 import csv
 
-def read_meanstd(gen_conf, test_conf) :
+def read_meanstd(gen_conf, test_conf, case_name) :
     mean_filename = generate_output_filename(
             gen_conf['model_path'],
             test_conf['dataset'],
