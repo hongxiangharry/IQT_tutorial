@@ -10,33 +10,6 @@ general_configuration = {
     'results_path' : 'result',
     'evaluation_path': 'evaluation',
     'dataset_info' : {
-        'iSeg2017' : {
-            'format' : 'analyze',
-            'dimensions' : (144, 192, 256),
-            'num_volumes' : 10,
-            'modalities' : 2,
-            'general_pattern' : 'subject-{}-{}.hdr',
-            'path' : 'iSeg2017/iSeg-2017-Training/',
-            'inputs' : ['T1', 'T2', 'label']
-        },
-        'IBSR18' : {
-            'format' : 'nii',
-            'dimensions' : (256, 128, 256),
-            'num_volumes' : 10, # at least 3
-            'modalities' : 1,
-            'general_pattern' : 'IBSR_{0:02}/IBSR_{0:02}_{1}.nii.gz',
-            'path' : 'IBSR18/',
-            'inputs' : ['ana_strip', 'segTRI_ana']
-        },
-        'MICCAI2012' : {
-            'format' : 'nii',
-            'dimensions' : (256, 287, 256),
-            'num_volumes' : [15, 20],
-            'modalities' : 1,
-            'general_pattern' : ['{}/{}_tmp.nii.gz', '{}/{}_3C_tmp.nii.gz', '{}/{}_{}.nii.gz'],
-            'path' : 'MICCAI2012/',
-            'folder_names' : ['training-images', 'training-labels', 'testing-images', 'testing-labels']
-        },
         'HCP-Wu-Minn-Contrast': {
             'format' : 'nii',
             'dimensions': (260, 311, 256), # output shape
@@ -98,7 +71,7 @@ training_configuration = {
     'decay' : 0.000001,
     'learning_rate' : 0.001,
     'downsize_factor' : 1,
-    'num_kernels' : 3,
+    'num_kernels' : 2,
     'num_filters' : 128,
     'mapping_times' : 2,
     'ishomo': False
