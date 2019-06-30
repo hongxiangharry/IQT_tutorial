@@ -45,7 +45,7 @@ general_configuration = {
             'general_pattern': '{}/T1w/{}_acpc_dc_restore_brain{}.nii',
             'path': 'HCP',
             'postfix_category': {'cnn_input': 0, 'cnn_gt': 1, 'preproc_out': 2, 'preproc_in': 3},
-            'postfix': ['_procin', '', '_procin', ''],
+            'postfix': ['_procin', '_sim036T_ds6_gap2_groundtruth', '_procin', '_sim036T_ds6_gap2_groundtruth'],
             'modality_categories': ['T1w', 'T2w', 'FLAIR', 'T2starw'],
             'downsample_scale' : 8,
             'sparse_scale' : [1, 1, 8],
