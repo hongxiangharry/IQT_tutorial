@@ -542,6 +542,7 @@ def read_volume_data(filename) :
 
 def generate_output_filename(
     path, dataset, case_name, approach, dimension, patch_shape, extraction_step, extension) :
-    file_pattern = '{}/{}/{:02}-{}-{}-{}-{}.{}'
+#     file_pattern = '{}/{}/{:02}-{}-{}-{}-{}.{}'
+    file_pattern = '{}/{}/{}-{}-{}-{}-{}.{}'
     print(file_pattern.format(path, dataset, case_name, approach, dimension, patch_shape, extraction_step, extension))
     return file_pattern.format(path, dataset, case_name, approach, dimension, patch_shape, extraction_step, extension)
