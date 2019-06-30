@@ -42,15 +42,19 @@ def generate_callbacks(general_configuration, training_configuration, case_name,
         mean = {'input': 0.0, 'output': 0.0}
         std = {'input': 1.0, 'output': 1.0}
     ## write mean
-    w = csv.writer(open(mean_filename, "w"))
-    for key, val in mean.items():
-        w.writerow([key, val])
-    w.close()
-    w = csv.writer(open(std_filename, "w"))
-    for key, val in std.items():
-        w.writerow([key, val])
-    w.close()
-    
+#     w = csv.writer(open(mean_filename, "w"))
+#     for key, val in mean.items():
+#         w.writerow([key, val])
+#     w.close()
+    with open(mean_filename, "w") as outfile:
+        w = csv.writer(outfile)
+        for key, val in mean.items():
+            w.writerow([key, val])
+    with open(std_filename, "w") as outfile:
+        w = csv.writer(outfile)
+        for key, val in std.items():
+            w.writerow([key, val])
+            
     ## save model
     model_filename = generate_output_filename(
         general_configuration['model_path'],
