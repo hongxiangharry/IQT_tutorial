@@ -53,8 +53,8 @@ training_configuration = {
     'approach' : 'SRUnet',
     'dataset' : 'HCP-Wu-Minn-Contrast',
     'dimension' : 3,
-    'extraction_step' : (16, 16, 16),
-    'extraction_step_test' :(16, 16, 16),
+    'extraction_step' : (16, 16, 2),
+    'extraction_step_test' :(16, 16, 2),
     'loss' : 'mean_squared_error',
     'metrics' : ['mse'],
     'batch_size' : 32,
@@ -72,7 +72,7 @@ training_configuration = {
     'learning_rate' : 0.001,
     'downsize_factor' : 1,
     'num_kernels' : 2,
-    'num_filters' : 128,
+    'num_filters' : 32,
     'mapping_times' : 2,
     'ishomo': False
 }

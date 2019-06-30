@@ -29,7 +29,7 @@ opt, gen_conf, train_conf = data_preparation(gen_conf, train_conf)
 # '204319', '204420', '204521', '204622', '205119', '205220', '205725', '205826', '206222', '206323']
 
 # GPU configuration on the Miller/Armstrong cluster
-is_processed = False
+is_processed = True
 is_cmic_cluster = True
 
 if is_cmic_cluster == True:
