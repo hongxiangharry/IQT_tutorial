@@ -75,7 +75,7 @@ general_configuration = {
 }
 
 training_configuration = {
-    'retrain' : True,
+    'retrain' : False,
     'activation' : 'null',
     'approach' : 'SRUnet',
     'dataset' : 'HCP-Wu-Minn-Contrast',
@@ -100,5 +100,6 @@ training_configuration = {
     'downsize_factor' : 1,
     'num_kernels' : 3,
     'num_filters' : 128,
-    'mapping_times' : 2
+    'mapping_times' : 2,
+    'ishomo': False
 }
