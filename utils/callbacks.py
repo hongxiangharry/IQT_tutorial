@@ -34,9 +34,9 @@ def generate_callbacks(general_configuration, training_configuration, case_name,
         str(training_configuration['extraction_step'])+'_std',
         'csv')
     ## check and make folders
-    meanstd_foldername = os.path.dirname(meanstd_filename)
-    if not os.path.isdir(meanstd_foldername) :
-        os.makedirs(meanstd_foldername)
+    meanstd_foldername = os.path.dirname(mean_filename)
+    if not os.path.isdir(mean_foldername) :
+        os.makedirs(mean_foldername)
             
     if (mean is None) or (std is None):
         mean = {'input': 0.0, 'output': 0.0}
