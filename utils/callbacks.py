@@ -39,8 +39,8 @@ def generate_callbacks(general_configuration, training_configuration, case_name,
         os.makedirs(meanstd_foldername)
             
     if (mean is None) or (std is None):
-        mean = {'input': 0.0, 'output': 0.0}
-        std = {'input': 1.0, 'output': 1.0}
+        mean = {'input': np.array([0.0]), 'output': np.array([0.0])}
+        std = {'input': np.array([1.0]), 'output': np.array([1.0])}
     ## write mean
 #     w = csv.writer(open(mean_filename, "w"))
 #     for key, val in mean.items():

@@ -16,7 +16,7 @@ def read_meanstd(gen_conf, test_conf, case_name) :
             'csv')
     with open(mean_filename, mode='r') as infile:
         reader = csv.reader(infile)
-        mean = {rows[0]:rows[1] for rows in reader}
+        mean = {rows[0]:np.array(rows[1]) for rows in reader}
         
     std_filename = generate_output_filename(
             gen_conf['model_path'],
@@ -29,7 +29,7 @@ def read_meanstd(gen_conf, test_conf, case_name) :
             'csv')
     with open(std_filename, mode='r') as infile:
         reader = csv.reader(infile)
-        std = {rows[0]:rows[1] for rows in reader}
+        std = {rows[0]:np.array(rows[1]) for rows in reader}
     return mean, std
 
 def read_model(gen_conf, train_conf, case_name) :
