@@ -29,13 +29,13 @@ opt, gen_conf, train_conf = data_preparation(gen_conf, train_conf)
 # '204319', '204420', '204521', '204622', '205119', '205220', '205725', '205826', '206222', '206323']
 
 # GPU configuration on the Miller/Armstrong cluster
-is_processed = True
+is_processed = False
 is_cmic_cluster = True
-gpu_no = opt['gpu']
 
 if is_cmic_cluster == True:
     # GPUs devices:
     ## Marco "CUDA_VISIBLE_DEVICES" defines the working GPU in the CMIC clusters.
+    gpu_no = opt['gpu']
     os.environ["CUDA_VISIBLE_DEVICES"] = gpu_no
     from tensorflow.python.client import device_lib
     print device_lib.list_local_devices()  ## Check the GPU list.
