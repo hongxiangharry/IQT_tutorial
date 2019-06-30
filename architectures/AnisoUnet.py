@@ -12,7 +12,7 @@ from keras.models import Model
 from keras.optimizers import Adam, SGD
 K.set_image_dim_ordering('th')
 
-def generate_hetero_unet_model(gen_conf, train_conf) :
+def generate_aniso_unet_model(gen_conf, train_conf) :
     dataset = train_conf['dataset']
     activation = train_conf['activation']
     dimension = train_conf['dimension']
