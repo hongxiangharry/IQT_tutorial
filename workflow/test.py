@@ -25,7 +25,7 @@ def testing(gen_conf, test_conf, train_conf = None) :
     ## load data
     input_data, _ = read_dataset(gen_conf, test_conf, 'test')
     ## load mean and std
-    mean, std = read_meanstd(gen_conf, test_conf)
+    mean, std = read_meanstd(gen_conf, test_conf, 1)
     ## load model
     if train_conf == None:
         model = read_model(gen_conf, test_conf, 1) # comment cauz' debugging

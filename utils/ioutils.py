@@ -3,7 +3,7 @@ import numpy as np
 import os
 from architectures.arch_creator import generate_model
 
-def read_meanstd(gen_conf, test_conf) :
+def read_meanstd(gen_conf, test_conf, case_name) :
     meanstd_filename = generate_output_filename(
             gen_conf['model_path'],
             test_conf['dataset'],
