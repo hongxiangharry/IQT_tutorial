@@ -3,9 +3,9 @@ This is a repo for IQT tutorial.
 
 ## Environmental Set-up
 On Miniconda: 
-1. Create a virtual environment by `conda create -n abcd_npc python=2.7.12`
+1. Create a virtual environment by `conda create -n iqt python=2.7.12`
 2. Install required packages.
-3. Enter the environment by `source activate abcd_npc`
+3. Enter the environment by `source activate iqt`
 
 ## Python Package Dependency
 -----------------------------------------------------------
