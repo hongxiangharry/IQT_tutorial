@@ -1,3 +1,27 @@
 # IQT_tutorial
 This is a repo for IQT tutorial.
 
+## Environmental Set-up
+On Miniconda: 
+1. Create a virtual environment by `conda create -n abcd_npc python=2.7.12`
+2. Install required packages.
+3. Enter the environment by `source activate abcd_npc`
+
+## Python Package Dependency
+-----------------------------------------------------------
+Name                     |Version         |Build
+-------------------------|----------------|----------------
+h5py                     |2.7.0           |  py27h71d1790_1  
+hdf5                     |1.10.1          |      h9caa474_1  
+Keras                    | 2.2.4          |           <pip>
+matplotlib               | 2.0.2          |     np113py27_0  
+numpy                    | 1.13.3         |  py27ha266831_3  
+pandas                   | 0.23.4         |  py27h04863e7_0  
+scikit-image             | 0.13.0         |  py27h06cb35d_1  
+scikit-learn             | 0.18.1         |     np113py27_1  
+scipy                    | 0.19.0         |     np113py27_0  
+tensorboard              | 1.8.0          |  py27hf484d3e_0  
+tensorflow               | 1.8.0          |      h16da8f2_0  
+tensorflow-gpu           | 1.8.0          |      h7b35bdc_0 
+nibabel                  | 2.1.0          |            <pip>
+-----------------------------------------------------------

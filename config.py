@@ -1,10 +1,10 @@
 general_configuration = {
     'num_classes' : 3, # label classes
-    # 'dataset_path' : '/Users/hongxianglin/document/ucl_coding/P5_mri_image/', # PC
-    'dataset_path' : '/home/harrylin/', # cluster
-    # 'base_path' : '/Users/hongxianglin/document/ucl_coding/P3_IQT_Unet/tutorial_result/', # PC
-    'base_path' : '/home/harrylin/iqt_tutorial_results', # cluster
-    'job_name' : 'default',
+    'dataset_path' : '/Users/hongxianglin/document/ucl_coding/P5_mri_image/', # PC
+    # 'dataset_path' : '/home/harrylin/', # cluster
+    'base_path' : '/Users/hongxianglin/document/ucl_coding/P3_IQT_Unet/tutorial_result/', # PC
+    # 'base_path' : '/home/harrylin/iqt_tutorial_results', # cluster
+    'job_name' : 'srunet16_16_2',
     'log_path' : 'log',
     'model_path' : 'models',
     'results_path' : 'result',
@@ -13,7 +13,7 @@ general_configuration = {
         'HCP-Wu-Minn-Contrast': {
             'format' : 'nii',
             'dimensions': (260, 311, 256), # output shape
-            'num_volumes': [3, 1], # train and test
+            'num_volumes': [3, 2], # train and test
             'modalities': 1,
             'general_pattern': '{}/T1w/{}_acpc_dc_restore_brain{}.nii',
             'path': 'HCP',
@@ -27,23 +27,6 @@ general_configuration = {
             'upsample_scale': [1, 1, 8],
             'interp_order' : 3 # try 0-5
         },
-        'HBN': {
-            'format': 'nii',
-            'dimensions': (176, 256, 256),  # output shape
-            'num_volumes': [15, 5],  # train and test
-            'modalities': 1,
-            'general_pattern': '{}/{}_{}{}.nii',
-            'path': 'HBN-data',
-            # 'postfix': ['.nii_sim036T_ds5_gap1_GM53_WM61', '_SS'],
-            'postfix': ['_sim036T_2d_GM50_WM63_pre', '', '_sim036T_2d_GM50_WM63'],
-            # 'postfix': ['_sim036T_2d_GM12_WM14_k8', '', '_sim036T_2d_GM12_WM14_k8', '.nii_sim036T_GM12_WM14'],
-            'modality_categories': ['T1w', 'T2w', 'FLAIR', 'T2starw'],
-            'downsample_scale': 6,
-            'sparse_scale': [1, 1, 6],
-            'shrink_dim': 3,
-            'is_preproc': False,  # input pre-processing
-            'upsample_scale': [1, 1, 6],
-        }
     }
 }
 
