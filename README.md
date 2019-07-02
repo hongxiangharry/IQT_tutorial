@@ -3,9 +3,15 @@ This is a repo for IQT tutorial.
 
 ## Environmental Set-up
 On Miniconda: 
-1. Create a virtual environment by `conda create -n abcd_npc python=2.7.12`
-2. Install required packages.
-3. Enter the environment by `source activate abcd_npc`
+1. Create a virtual environment by `conda create -n iqt python=2.7.12`
+2. Enter the environment by `source activate iqt`
+3. Install required packages by:
+```
+pip install nibabel==2.1.0
+conda install -y h5py=2.7.0 ipython=5.3.0 jupyter=1.0.0 scipy=0.19.0 scikit-image=0.13.0 scikit-learn=0.18.1 tensorflow=1.8.0 tensorflow-gpu=1.8.0
+pip install keras==2.2.0 nipype==0.12.1
+```
+
 
 ## Python Package Dependency
 -----------------------------------------------------------
