@@ -73,6 +73,49 @@ def read_dataset(gen_conf, train_conf, trainTestFlag = 'train') :
         return read_IBSR18_dataset(dataset_path, dataset_info)
     if dataset == 'MICCAI2012' :
         return read_MICCAI2012_dataset(dataset_path, dataset_info)
+    if dataset == 'IBSR' :
+        return read_IBSR_dataset(dataset_path, dataset_info)
+    
+def read_IBSR_dataset(dataset_path,
+                      dataset_info,
+                      trainTestFlag = 'train'):
+    dimensions = dataset_info['dimensions']
+    sparse_scale = dataset_info['sparse_scale']
+    input_dimension = tuple(np.array(dimensions)/sparse_scale)
+    modalities = dataset_info['modalities']
+    path = dataset_info['path']
+    pattern = dataset_info['general_pattern']
+    modality_categories = dataset_info['modality_categories']
+    in_postfix = dataset_info['postfix'][0]
+    out_postfix = dataset_info['postfix'][1]
+    if trainTestFlag == 'train' :
+        subject_lib = dataset_info['training_subjects']
+        num_volumes = dataset_info['num_volumes'][0]
+    elif trainTestFlag == 'test' :
+        subject_lib = dataset_info['test_subjects']
+        num_volumes = dataset_info['num_volumes'][1]
+    else :
+        raise ValueError("trainTestFlag should be declared as 'train'/'test'/'evaluation'")
+
+    in_data = np.zeros((num_volumes, modalities) + input_dimension)
+    out_data = np.zeros((num_volumes, modalities) + dimensions)
+
+    for img_idx in range(num_volumes):
+        for mod_idx in range(modalities):
+            in_filename = os.path.join(dataset_path,
+                                       path,
+                                       pattern).format(subject_lib[img_idx],
+                                                       subject_lib[img_idx],
+                                                       in_postfix)
+            in_data[img_idx, mod_idx] = read_volume(in_filename)
+            out_filename = os.path.join(dataset_path,
+                                        path,
+                                        pattern).format(subject_lib[img_idx],
+                                                        subject_lib[img_idx],
+                                                        out_postfix)
+            out_data[img_idx, mod_idx] = read_volume(out_filename)
+
+    return in_data, out_data
 
 def read_IBADAN_data(dataset_path,
                      dataset_info,
