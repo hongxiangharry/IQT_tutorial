@@ -1,10 +1,8 @@
 general_configuration = {
     'num_classes' : 3, # label classes
-    'dataset_path' : '/Users/hongxianglin/document/ucl_coding/P5_mri_image/', # PC
-    # 'dataset_path' : '/home/harrylin/', # cluster
-    'base_path' : '/Users/hongxianglin/document/ucl_coding/P3_IQT_Unet/tutorial_result/', # PC
-    # 'base_path' : '/home/harrylin/iqt_tutorial_results', # cluster
-    'job_name' : 'srunet16_16_2',
+    'dataset_path' : '<YOUR_HOME_DIRECTORY>/', # PC
+    'base_path' : '<YOUR_HOME_DIRECTORY>/tutorial_result/', # PC
+    'job_name' : 'srunet16_16_2_nf4', # 'srunet16_16_2_nf4' or 'anisounet16_16_2_nf4'
     'log_path' : 'log',
     'model_path' : 'models',
     'results_path' : 'result',
@@ -33,7 +31,7 @@ general_configuration = {
 training_configuration = {
     'retrain' : False,
     'activation' : 'null',
-    'approach' : 'SRUnet',
+    'approach' : 'SRUnet', # `SRUnet` or `AnisoUnet`
     'dataset' : 'HCP-Wu-Minn-Contrast',
     'dimension' : 3,
     'extraction_step' : (16, 16, 2),
@@ -55,7 +53,7 @@ training_configuration = {
     'learning_rate' : 0.001,
     'downsize_factor' : 1,
     'num_kernels' : 2,
-    'num_filters' : 32,
+    'num_filters' : 4,
     'mapping_times' : 2,
     'ishomo': False
 }
