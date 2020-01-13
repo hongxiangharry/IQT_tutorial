@@ -8,8 +8,8 @@ from keras.layers.core import Permute, Reshape
 from keras.layers.merge import concatenate
 from keras.models import Model
 
-K.set_image_dim_ordering('th')
-
+# K.set_image_dim_ordering('th')
+K.set_image_data_format('channels_first')
 def generate_dolz_multi_model(gen_conf, train_conf) :
     dataset = train_conf['dataset']
     activation = train_conf['activation']

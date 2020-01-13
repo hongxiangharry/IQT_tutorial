@@ -10,8 +10,8 @@ from keras.layers.merge import add as layer_add
 from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 from keras.optimizers import Adam, SGD
-K.set_image_dim_ordering('th')
-
+# K.set_image_dim_ordering('th')
+K.set_image_data_format('channels_first')
 def generate_srunet_model(gen_conf, train_conf) :
     dataset = train_conf['dataset']
     activation = train_conf['activation']
@@ -79,7 +79,7 @@ def __generate_srunet_model22(
         conv1 = get_shuffling_operation2(dimension, conv1, shuffling_dim, temp_sparse_scale) ## c32
         conv2 = get_conv_core(dimension, pool1, int(num_filters*2/downsize_factor)) ## c256
 
-        temp_sparse_scale = sparse_scale / [1, 1, 2]
+        temp_sparse_scale = sparse_scale // [1, 1, 2]
         pool2 = get_max_pooling_layer(dimension, conv2, (2, 2, 1))
         conv2 = get_shuffling_operation2(dimension, conv2, shuffling_dim, temp_sparse_scale) ## c128
         conv3 = get_conv_core(dimension, pool2, int(num_filters*4/downsize_factor)) ## c512
@@ -107,7 +107,7 @@ def __generate_srunet_model22(
         # up7 = get_deconv_layer(dimension, conv7, int(num_filters*4/downsize_factor)) ## c512
         # up7 = concatenate([up7, conv3], axis=1) ## c512+512
 
-        temp_sparse_scale = sparse_scale/[1, 1, 2]
+        temp_sparse_scale = sparse_scale//[1, 1, 2]
         conv8 = get_conv_core(dimension, conv3, int(num_filters*4/downsize_factor)) ## c256
         up8 = get_deconv_layer(dimension, conv8, int(num_filters*2/downsize_factor)) ## c128
         up8 = concatenate([up8, conv2], axis=1) ## c128+128
@@ -131,12 +131,12 @@ def __generate_srunet_model22(
         conv1 = get_shuffling_operation(dimension, conv1, shuffling_dim, temp_sparse_scale)  ## c32
         conv2 = get_conv_core(dimension, pool1, int(num_filters * 3 / downsize_factor), num_kernel=num_kernels)  ## c256
 
-        temp_sparse_scale = sparse_scale / [1, 1, 3]
+        temp_sparse_scale = sparse_scale // [1, 1, 3]
         pool2 = get_max_pooling_layer(dimension, conv2, (2, 2, 1))
         conv2 = get_shuffling_operation(dimension, conv2, shuffling_dim, temp_sparse_scale)  ## c128
         conv3 = get_conv_core(dimension, pool2, int(num_filters * 6 / downsize_factor), num_kernel=num_kernels)  ## c512
 
-        temp_sparse_scale = sparse_scale / [1, 1, 6]
+        temp_sparse_scale = sparse_scale // [1, 1, 6]
         pool3 = get_max_pooling_layer(dimension, conv3)
         conv3 = get_shuffling_operation(dimension, conv3, shuffling_dim, temp_sparse_scale)  ## c512
         conv4 = get_conv_core(dimension, pool3, int(num_filters * 12 / downsize_factor),
@@ -190,12 +190,12 @@ def __generate_srunet_model22(
         conv1 = get_shuffling_operation2(dimension, conv1, shuffling_dim, temp_sparse_scale)  ## c2
         conv2 = get_conv_core(dimension, pool1, int(num_filters * 2 / downsize_factor))  ## c32
 
-        temp_sparse_scale = sparse_scale / [1, 1, 2] ## [1,1,4]
+        temp_sparse_scale = sparse_scale // [1, 1, 2] ## [1,1,4]
         pool2 = get_max_pooling_layer(dimension, conv2, (2, 2, 1))
         conv2 = get_shuffling_operation2(dimension, conv2, shuffling_dim, temp_sparse_scale)  ## c8
         conv3 = get_conv_core(dimension, pool2, int(num_filters * 4 / downsize_factor))  ## c64
 
-        temp_sparse_scale = sparse_scale / [1, 1, 4] ## [1,1,2]
+        temp_sparse_scale = sparse_scale // [1, 1, 4] ## [1,1,2]
         pool3 = get_max_pooling_layer(dimension, conv3, (2, 2, 1))
         conv3 = get_shuffling_operation2(dimension, conv3, shuffling_dim, temp_sparse_scale)  ## c32
         conv4 = get_conv_core(dimension, pool3, int(num_filters * 8 / downsize_factor))  ## c128
@@ -217,12 +217,12 @@ def __generate_srunet_model22(
         #                        int(num_filters * 8  / downsize_factor))  ## c128
         # up6 = concatenate([up6, conv4], axis=1)  ## c128+128
 
-        temp_sparse_scale = sparse_scale / [1, 1, 4] ## [1,1,2]
+        temp_sparse_scale = sparse_scale // [1, 1, 4] ## [1,1,2]
         conv7 = get_conv_core(dimension, conv4, int(num_filters * 8 / downsize_factor))  ## c128
         up7 = get_deconv_layer(dimension, conv7, int(num_filters * 4 / downsize_factor))  ## c64
         up7 = concatenate([up7, conv3], axis=1)  ## c64+64
 
-        temp_sparse_scale = sparse_scale / [1, 1, 2] ## [1,1,4]
+        temp_sparse_scale = sparse_scale // [1, 1, 2] ## [1,1,4]
         conv8 = get_conv_core(dimension, up7, int(num_filters * 4 / downsize_factor))  ## c64
         up8 = get_deconv_layer(dimension, conv8,
                                int(num_filters * 2 / downsize_factor))  ## c32

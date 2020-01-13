@@ -162,7 +162,7 @@ def read_HCPWuMinnContrast_dataset(dataset_path,
                                    trainTestFlag = 'train'):
     dimensions = dataset_info['dimensions']
     sparse_scale = dataset_info['sparse_scale']
-    input_dimension = tuple(np.array(dimensions)/sparse_scale)
+    input_dimension = tuple(np.array(dimensions)//sparse_scale)
     modalities = dataset_info['modalities']
     path = dataset_info['path']
     pattern = dataset_info['general_pattern']
@@ -177,7 +177,7 @@ def read_HCPWuMinnContrast_dataset(dataset_path,
         num_volumes = dataset_info['num_volumes'][1]
     else :
         raise ValueError("trainTestFlag should be declared as 'train'/'test'/'evaluation'")
-
+    print(num_volumes, modalities, input_dimension)
     in_data = np.zeros((num_volumes, modalities) + input_dimension)
     out_data = np.zeros((num_volumes, modalities) + dimensions)
 

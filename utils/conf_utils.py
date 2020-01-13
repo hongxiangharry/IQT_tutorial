@@ -249,17 +249,17 @@ def save_conf_info(gen_conf, train_conf):
         os.makedirs(csv_foldername)
 
     # save gen_conf
-    with open(csv_filename_gen, 'wb') as f:  # Just use 'w' mode in 3.x
+    with open(csv_filename_gen, 'w') as f:  # Just use 'w' mode in 3.x
         w = csv.DictWriter(f, gen_conf.keys())
         w.writeheader()
         w.writerow(gen_conf)
 
-    with open(csv_filename_train, 'wb') as f:  # Just use 'w' mode in 3.x
+    with open(csv_filename_train, 'w') as f:  # Just use 'w' mode in 3.x
         w = csv.DictWriter(f, train_conf.keys())
         w.writeheader()
         w.writerow(train_conf)
 
-    with open(csv_filename_dataset, 'wb') as f:  # Just use 'w' mode in 3.x
+    with open(csv_filename_dataset, 'w') as f:  # Just use 'w' mode in 3.x
         w = csv.DictWriter(f, dataset_info.keys())
         w.writeheader()
         w.writerow(dataset_info)

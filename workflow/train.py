@@ -125,7 +125,7 @@ def compute_statistics(input_data, num_modalities) :
     return mean, std
 
 def normalise_set(input_data, num_modalities, mean, std) :
-    print input_data.shape
+    print( input_data.shape)
     input_data_tmp = np.copy(input_data)
     for vol_idx in range(len(input_data_tmp)) :
         for modality in range(num_modalities) :

@@ -9,7 +9,7 @@ def preproc_dataset(gen_conf, train_conf) :
     dataset_info = gen_conf['dataset_info'][dataset]
 
     if dataset == 'HCP-Wu-Minn-Contrast' :
-        print 'Downsample HCP data with 1D Gaussian filter.'
+        print( 'Downsample HCP data with 1D Gaussian filter.')
         preproc_in_idx = dataset_info['postfix_category']['preproc_in'] #
         in_postfix = dataset_info['postfix'][preproc_in_idx] # raw input data name
         preproc_out_idx = dataset_info['postfix_category']['preproc_out'] #
@@ -66,7 +66,7 @@ def downsample_HCPWuMinnContrast_dataset(dataset_path,
                                         pattern).format(subject_lib[img_idx],
                                                         modality_categories[mod_idx],
                                                         out_postfix)
-            print 'Processing \''+in_filename+'\''
+            print( 'Processing \''+in_filename+'\'')
             data = nib.load(in_filename) # load raw data
             fwhm = np.array(data.header.get_zooms()) * [0, 0, downsample_scale] # FWHM of Gaussian filter
             i_affine = np.dot(data.affine, np.diag(voxel_scale + [1]))  # affine rescaling
@@ -74,7 +74,7 @@ def downsample_HCPWuMinnContrast_dataset(dataset_path,
             data = smooth_image(data, fwhm) # smoothed by FWHM
             data = resample_from_to(data, (i_shape, i_affine)) # resize
             nib.save(data, out_filename)
-            print 'Save to \''+out_filename+'\''
+            print( 'Save to \''+out_filename+'\'')
             
     return True
 

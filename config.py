@@ -1,7 +1,7 @@
 general_configuration = {
     'num_classes' : 3, # label classes
     # 'dataset_path' : '/Users/hongxianglin/document/ucl_coding/P5_mri_image/', # PC
-    'dataset_path' : '/home/harrylin/', # cluster
+    'dataset_path' : '/cluster/project0/IQT_Nigeria', # cluster
     # 'base_path' : '/Users/hongxianglin/document/ucl_coding/P3_IQT_Unet/tutorial_result/', # PC
     'base_path' : '/home/harrylin/iqt_tutorial_results', # cluster
     'job_name' : 'default',
@@ -15,8 +15,8 @@ general_configuration = {
             'dimensions': (260, 311, 256), # output shape
             'num_volumes': [3, 1], # train and test
             'modalities': 1,
-            'general_pattern': '{}/T1w/{}_acpc_dc_restore_brain{}.nii',
-            'path': 'HCP',
+            'general_pattern': '{}/{}_acpc_dc_restore_brain{}.nii',
+            'path': 'HCP/Process',
             'postfix_category': {'cnn_input': 0, 'cnn_gt': 1, 'preproc_out': 2, 'preproc_in': 3},
             'postfix': ['_procin', '_sim036T_ds6_gap2_groundtruth', '_procin', '_sim036T_ds6_gap2_groundtruth'],
             'modality_categories': ['T1w', 'T2w', 'FLAIR', 'T2starw'],

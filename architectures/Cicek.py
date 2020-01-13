@@ -9,8 +9,8 @@ from keras.layers.merge import concatenate
 from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 
-K.set_image_dim_ordering('th')
-
+# K.set_image_dim_ordering('th')
+K.set_image_data_format('channels_first')
 def generate_unet_model(gen_conf, train_conf) :
     dataset = train_conf['dataset']
     activation = train_conf['activation']

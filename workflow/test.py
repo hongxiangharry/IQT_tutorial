@@ -174,7 +174,7 @@ def test_model(gen_conf,
     return True
 
 def normalise_volume(input_data, num_modalities, mean, std) :
-    print input_data.shape
+#    print input_data.shape
     input_data_tmp = np.copy(input_data)
     for vol_idx in range(len(input_data_tmp)) :
         for modality in range(num_modalities) :
@@ -183,7 +183,7 @@ def normalise_volume(input_data, num_modalities, mean, std) :
     return input_data_tmp
 
 def denormalise_volume(input_data, num_modalities, mean, std) :
-    print input_data.shape
+#    print input_data.shape
     input_data_tmp = np.copy(input_data)
     for vol_idx in range(len(input_data_tmp)) :
         for modality in range(num_modalities) :
