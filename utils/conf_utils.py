@@ -144,6 +144,42 @@ def conf_dataset(gen_conf, train_conf):
         return conf_HBN_dataset(gen_conf, train_conf)
     if dataset == 'HCP-Wu-Minn-Contrast' :
         return conf_HCPWuMinnContrast_dataset(gen_conf, train_conf)
+    if dataset == 'IBSR' :
+        return conf_IBSR_dataset(gen_conf, train_conf)
+
+def conf_IBSR_dataset(gen_conf, train_conf):
+    dataset_path = gen_conf['dataset_path']
+    dataset_name = train_conf['dataset']
+
+    dataset_info = gen_conf['dataset_info'][dataset_name]
+    path = dataset_info['path']
+    train_num_volumes = dataset_info['num_volumes'][0]
+    test_num_volumes = dataset_info['num_volumes'][1]
+
+    hcp_dataset_path = os.path.join(dataset_path, path)
+    subject_lib = os.listdir(hcp_dataset_path)
+    assert len(subject_lib) >=  train_num_volumes + test_num_volumes
+
+    dataset_info['training_subjects'] = []
+    idx_sn = 0
+    for subject in subject_lib:
+        if os.path.isdir(os.path.join(hcp_dataset_path, subject)) \
+                and idx_sn < dataset_info['num_volumes'][0]:
+            dataset_info['training_subjects'].append(subject)
+            idx_sn += 1
+
+    dataset_info['test_subjects'] = []
+    for subject in subject_lib[idx_sn:]:
+        if os.path.isdir(os.path.join(hcp_dataset_path, subject)) \
+                and idx_sn < dataset_info['num_volumes'][0] + \
+                dataset_info['num_volumes'][1]:
+            dataset_info['test_subjects'].append(subject)
+            idx_sn += 1
+
+    gen_conf['dataset_info'][dataset_name] = dataset_info
+
+    return gen_conf, train_conf
+
 
 def conf_HBN_dataset(gen_conf, train_conf):
     dataset_path = gen_conf['dataset_path']
