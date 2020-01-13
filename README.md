@@ -15,19 +15,19 @@ conda install -y cudatoolkit=10.0.130 cudnn
 
 
 ## Python Package Dependency
------------------------------------------------------------
-Name                     |Version         |Build
--------------------------|----------------|----------------
-h5py                     | 2.10.0         |  py27h71d1790_1  
-hdf5                     | 1.10.5         |      h9caa474_1  
-Keras                    | 2.3.1          |           <pip>
-matplotlib               | 3.1.1          |     np113py27_0  
-numpy                    | 1.17.3         |  py27ha266831_3 
-scikit-image             | 0.16.2         |  py27h06cb35d_1  
-scikit-learn             | 0.22           |     np113py27_1  
-scipy                    | 1.3.2          |     np113py27_0  
-tensorboard              | 1.13.1         |  py27hf484d3e_0  
-tensorflow               | 1.13.1         |      h16da8f2_0  
-tensorflow-gpu           | 1.13.1         |      h7b35bdc_0 
-nibabel                  | 2.1.0          |           <pip>
------------------------------------------------------------
+------------------------------------------
+Name                     |Version         
+-------------------------|----------------
+h5py                     | 2.10.0           
+hdf5                     | 1.10.5           
+Keras                    | 2.3.1          
+matplotlib               | 3.1.1            
+numpy                    | 1.17.3          
+scikit-image             | 0.16.2           
+scikit-learn             | 0.22             
+scipy                    | 1.3.2            
+tensorboard              | 1.13.1           
+tensorflow               | 1.13.1           
+tensorflow-gpu           | 1.13.1          
+nibabel                  | 2.1.0          
+------------------------------------------
