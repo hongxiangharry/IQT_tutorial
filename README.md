@@ -1,5 +1,5 @@
 # IQT_tutorial
-This code is a demo for [MedICSS project](https://medicss.cs.ucl.ac.uk/image-quality-transfer-in-mri-with-deep-neural-networks/). It is a patch-based 3D IQT implementation using two neural networks, i.e. [SR U-net](https://arxiv.org/pdf/1706.03142.pdf) and [Anisotropic U-net](https://arxiv.org/pdf/1909.06763.pdf). It is able to 4x-super resolve on cross-plane direction of MR images. We employ the [HCP dataset](http://www.humanconnectomeproject.org/) as training and testing data. The trained model and test sample data are available by request via emailing `harry.lin[AT]ucl.ac.uk`.
+This code is a demo for [MedICSS project](https://medicss.cs.ucl.ac.uk/image-quality-transfer-in-mri-with-deep-neural-networks/). It is a patch-based 3D IQT implementation using two neural networks, i.e. [SR U-net](https://arxiv.org/pdf/1706.03142.pdf) and [Anisotropic U-net](https://arxiv.org/pdf/1909.06763.pdf). It is able to 8x-super resolve on cross-plane direction of MR images. We employ the [HCP dataset](http://www.humanconnectomeproject.org/) as training and testing data. The trained model and test sample data are available by request via emailing `harry.lin[AT]ucl.ac.uk`.
 
 ## Required configuration
 * Download a [Miniconda](https://docs.conda.io/en/latest/miniconda.html) version for your OS.
