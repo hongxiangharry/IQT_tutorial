@@ -17,7 +17,7 @@ On Miniconda:
 pip install nibabel==2.1.0 # If any error, run `pip install nibabel==2.1.0 --user` instead.
 conda install -y h5py=2.10.0 ipython=7.10.1 jupyter=1.0.0 scipy=1.3.2 scikit-image=0.16.2 scikit-learn=0.22 
 pip install tensorflow==1.13.1 tensorflow-gpu==1.13.1 keras==2.3.1 # If any error, add `--user` to the end of this command line.
-conda install -y cudatoolkit=10.0 cudnn
+conda install -y cudatoolkit=10.0 cudnn pyyaml
 ```
 
 ### Python Package Dependency
