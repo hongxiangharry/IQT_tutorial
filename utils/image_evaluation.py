@@ -117,7 +117,7 @@ def save_stats(csv_file, subject, modality, headers, stats):
     assert len(headers) == len([subject] + [modality] + stats)
 
     if os.path.exists(csv_file):
-        with open(csv_file, 'rb') as f:
+        with open(csv_file, 'r') as f:
             r = csv.reader(f)
             rows = list(r)
             rows_new = []
@@ -138,7 +138,7 @@ def save_stats(csv_file, subject, modality, headers, stats):
         rows_new = [headers, [subject]+ [modality]+stats]
 
     # save it to a csv file:
-    with open(csv_file, 'wb') as g:
+    with open(csv_file, 'w') as g:
         w = csv.writer(g)
         for row in rows_new:
             w.writerow(row)
