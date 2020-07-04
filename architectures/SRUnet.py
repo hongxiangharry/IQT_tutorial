@@ -84,7 +84,7 @@ def __generate_srunet_model22(
         conv2 = get_shuffling_operation2(dimension, conv2, shuffling_dim, temp_sparse_scale) ## c128
         conv3 = get_conv_core(dimension, pool2, int(num_filters*4/downsize_factor)) ## c512
 
-        # temp_sparse_scale = sparse_scale / [1, 1, 4]
+        # temp_sparse_scale = sparse_scale // [1, 1, 4]
         # pool3 = get_max_pooling_layer(dimension, conv3)
         # conv3 = get_shuffling_operation(dimension, conv3, shuffling_dim, temp_sparse_scale) ## c512
         # conv4 = get_conv_core(dimension, pool3, int(num_filters*8/downsize_factor)) ## c1024
@@ -200,7 +200,7 @@ def __generate_srunet_model22(
         conv3 = get_shuffling_operation2(dimension, conv3, shuffling_dim, temp_sparse_scale)  ## c32
         conv4 = get_conv_core(dimension, pool3, int(num_filters * 8 / downsize_factor))  ## c128
 
-        # temp_sparse_scale = sparse_scale / [1, 1, 8] ## [1,1,1]
+        # temp_sparse_scale = sparse_scale // [1, 1, 8] ## [1,1,1]
         # pool4 = get_max_pooling_layer(dimension, conv4)
         # # conv4 = get_shuffling_operation2(dimension, conv4, shuffling_dim, temp_sparse_scale)  ## c128
         # conv5 = get_conv_core(dimension, pool4, int(num_filters * 16 / downsize_factor))  ## c256

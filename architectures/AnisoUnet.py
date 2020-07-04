@@ -80,12 +80,12 @@ def __generate_hetero_unet_model3(
         conv1 = get_shuffling_operation(dimension, conv1, shuffling_dim, temp_sparse_scale) ## c32
         conv2 = get_conv_core(dimension, pool1, int(num_filters*2/downsize_factor), num_kernel=num_kernels) ## c256
 
-        temp_sparse_scale = sparse_scale / [1, 1, 2]
+        temp_sparse_scale = sparse_scale // [1, 1, 2]
         pool2 = get_max_pooling_layer(dimension, conv2, (2, 2, 1))
         conv2 = get_shuffling_operation(dimension, conv2, shuffling_dim, temp_sparse_scale) ## c128
         conv3 = get_conv_core(dimension, pool2, int(num_filters*4/downsize_factor), num_kernel=num_kernels) ## c512
 
-        temp_sparse_scale = sparse_scale / [1, 1, 4]
+        temp_sparse_scale = sparse_scale // [1, 1, 4]
         pool3 = get_max_pooling_layer(dimension, conv3)
         conv3 = get_shuffling_operation(dimension, conv3, shuffling_dim, temp_sparse_scale) ## c512
         conv4 = get_conv_core(dimension, pool3, int(num_filters*8/downsize_factor), num_kernel=num_kernels) ## c1024
@@ -133,12 +133,12 @@ def __generate_hetero_unet_model3(
         conv1 = get_shuffling_operation(dimension, conv1, shuffling_dim, temp_sparse_scale)  ## c32
         conv2 = get_conv_core(dimension, pool1, int(num_filters * 3 / downsize_factor), num_kernel=num_kernels)  ## c256
 
-        temp_sparse_scale = sparse_scale / [1, 1, 3]
+        temp_sparse_scale = sparse_scale // [1, 1, 3]
         pool2 = get_max_pooling_layer(dimension, conv2, (2, 2, 1))
         conv2 = get_shuffling_operation(dimension, conv2, shuffling_dim, temp_sparse_scale)  ## c128
         conv3 = get_conv_core(dimension, pool2, int(num_filters * 6 / downsize_factor), num_kernel=num_kernels)  ## c512
 
-        temp_sparse_scale = sparse_scale / [1, 1, 6]
+        temp_sparse_scale = sparse_scale // [1, 1, 6]
         pool3 = get_max_pooling_layer(dimension, conv3)
         conv3 = get_shuffling_operation(dimension, conv3, shuffling_dim, temp_sparse_scale)  ## c512
         conv4 = get_conv_core(dimension, pool3, int(num_filters * 12 / downsize_factor),
@@ -166,7 +166,7 @@ def __generate_hetero_unet_model3(
                                int(num_filters * 6 / np.prod(temp_sparse_scale) / downsize_factor))  ## c512
         up7 = concatenate([up7, conv3], axis=1)  ## c512+512
 
-        temp_sparse_scale = sparse_scale / [1, 1, 3]
+        temp_sparse_scale = sparse_scale // [1, 1, 3]
         conv8 = get_conv_core(dimension, up7, int(num_filters * 6 / np.prod(temp_sparse_scale) / downsize_factor),
                               num_kernel=num_kernels)  ## c256
         up8 = get_deconv_layer(dimension, conv8,
@@ -192,18 +192,18 @@ def __generate_hetero_unet_model3(
         conv1 = get_shuffling_operation(dimension, conv1, mapping_times, temp_sparse_scale)  ## c2
         conv2 = get_conv_core(dimension, pool1, int(num_filters * 2 / downsize_factor), num_kernel=num_kernels)  ## c32
 
-        temp_sparse_scale = sparse_scale / [1, 1, 2] ## [1,1,4]
+        temp_sparse_scale = sparse_scale // [1, 1, 2] ## [1,1,4]
         pool2 = get_max_pooling_layer(dimension, conv2, (2, 2, 1))
         conv2 = get_shuffling_operation(dimension, conv2, mapping_times, temp_sparse_scale)  ## c8
         conv3 = get_conv_core(dimension, pool2, int(num_filters * 4 / downsize_factor), num_kernel=num_kernels)  ## c64
 
-        temp_sparse_scale = sparse_scale / [1, 1, 4] ## [1,1,2]
+        temp_sparse_scale = sparse_scale // [1, 1, 4] ## [1,1,2]
         pool3 = get_max_pooling_layer(dimension, conv3, (2, 2, 1))
         conv3 = get_shuffling_operation(dimension, conv3, mapping_times, temp_sparse_scale)  ## c32
         conv4 = get_conv_core(dimension, pool3, int(num_filters * 8 / downsize_factor),
                               num_kernel=num_kernels)  ## c128
 
-        temp_sparse_scale = sparse_scale / [1, 1, 8] ## [1,1,1]
+        temp_sparse_scale = sparse_scale // [1, 1, 8] ## [1,1,1]
         pool4 = get_max_pooling_layer(dimension, conv4)
         conv4 = get_shuffling_operation(dimension, conv4, mapping_times, temp_sparse_scale)  ## c128
         conv5 = get_conv_core(dimension, pool4, int(num_filters * 16 / downsize_factor))  ## c256
@@ -221,14 +221,14 @@ def __generate_hetero_unet_model3(
                                int(num_filters * 8  / downsize_factor))  ## c128
         up6 = concatenate([up6, conv4], axis=1)  ## c128+128
 
-        temp_sparse_scale = sparse_scale / [1, 1, 4] ## [1,1,2]
+        temp_sparse_scale = sparse_scale // [1, 1, 4] ## [1,1,2]
         conv7 = get_conv_core(dimension, up6, int(num_filters * 8 / downsize_factor),
                               num_kernel=num_kernels)  ## c128
         up7 = get_deconv_layer(dimension, conv7,
                                int(num_filters * 4 / downsize_factor))  ## c64
         up7 = concatenate([up7, conv3], axis=1)  ## c64+64
 
-        temp_sparse_scale = sparse_scale / [1, 1, 2] ## [1,1,4]
+        temp_sparse_scale = sparse_scale // [1, 1, 2] ## [1,1,4]
         conv8 = get_conv_core(dimension, up7, int(num_filters * 4 / downsize_factor),
                               num_kernel=num_kernels)  ## c64
         up8 = get_deconv_layer(dimension, conv8,

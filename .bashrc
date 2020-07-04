@@ -1,0 +1,4 @@
+PATH=/opt/ucl/bin:/opt/UCLCScourseware/bin:/usr/sbin:/sbin:/usr/bin:/bin:/usr/bin/X11:/opt/UCLCSdefunct/bin:/cs/student/msc/misc/2019/ucact21/bin.intel:/cs/student/msc/misc/2019/ucact21/bin:.:/cs/student/msc/misc/2019/ucact21/miniconda/bin:~/miniconda/bin
+PATH=/opt/ucl/bin:/opt/UCLCScourseware/bin:/usr/sbin:/sbin:/usr/bin:/bin:/usr/bin/X11:/opt/UCLCSdefunct/bin:/cs/student/msc/misc/2019/ucact21/bin.intel:/cs/student/msc/misc/2019/ucact21/bin:.:~/miniconda/bin
+PATH=/opt/ucl/bin:/opt/UCLCScourseware/bin:/usr/sbin:/sbin:/usr/bin:/bin:/usr/bin/X11:/opt/UCLCSdefunct/bin:/cs/student/msc/misc/2019/ucact21/bin.intel:/cs/student/msc/misc/2019/ucact21/bin:.:~/miniconda/bin
+PATH=/opt/ucl/bin:/opt/UCLCScourseware/bin:/usr/sbin:/sbin:/usr/bin:/bin:/usr/bin/X11:/opt/UCLCSdefunct/bin:/cs/student/msc/misc/2019/ucact21/bin.intel:/cs/student/msc/misc/2019/ucact21/bin:.:~/miniconda/bin

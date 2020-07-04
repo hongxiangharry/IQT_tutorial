@@ -1,7 +1,7 @@
 general_configuration = {
     'num_classes' : 3, # label classes
-    'dataset_path' : '/home/moucheng/harry/data/to_georgia', # PC
-    'base_path' : '/home/moucheng/harry/data/tutorial_result/', # PC
+    'dataset_path' : '/cs/student/msc/misc/2019/ucact21/hcp', # UCL desktop
+    'base_path' : '/cs/student/msc/misc/2019/ucact21/hcp/pretrain', # UCL desktop
     'job_name' : 'srunet16_16_2_nf4', # 'srunet16_16_2_nf4' or 'anisounet16_16_2_nf4'
     'log_path' : 'log',
     'model_path' : 'models',
@@ -11,7 +11,7 @@ general_configuration = {
         'HCP-Wu-Minn-Contrast': {
             'format' : 'nii',
             'dimensions': (260, 311, 260), # output shape
-            'num_volumes': [0, 5], # train and test
+            'num_volumes': [5, 5], # train and test
             'modalities': 1,
             'general_pattern': '{}/{}_acpc_dc_restore_brain{}.nii',
             'path': 'HCP',

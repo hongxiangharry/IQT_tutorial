@@ -90,7 +90,7 @@ def train_model(gen_conf,
 def __train_model(gen_conf, train_conf, x_train, y_train, x_val, y_val, case_name, callbacks, vis_flag=False):
     model = generate_model(gen_conf, train_conf)
 
-    print(model.summary()) # print model summary
+    # print(model.summary()) # print model summary
 
     history = model.fit(
         x_train, y_train,
